@@ -6,24 +6,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Baba extends Person {
+public class Granny extends Person {
 
 	private static final int MIN_KG = 3;
 	private static final int MAX_KG = 12;
-	private Pisar pisar;
+	private Writer pisar;
 
-	private List<Lyutenica> skladirani;
+	private List<Lyutenitsa> skladirani;
 
-	public Baba(String name, int age, Pisar pisar) throws PersonException {
+	public Granny(String name, int age, Writer pisar) throws PersonException {
 		super(name, age);
-		this.skladirani = new ArrayList<Lyutenica>();
+		this.skladirani = new ArrayList<Lyutenitsa>();
 		this.pisar = pisar;
 	}
 
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
-			List<Zelenchyk> partida = new ArrayList<Zelenchyk>(Kyhnya.getInstance().vzemiOtTava());
+			List<Vegetable> partida = new ArrayList<Vegetable>(Kitchen.getInstance().takeFromPan());
 			System.out.println("[" + this.getName() + "] Vzeh si nujnite zelenchyci");
 			try {
 				Thread.sleep(1000);
@@ -32,7 +32,7 @@ public class Baba extends Person {
 			}
 			int kg = this.variPartida();
 			this.skladiraiPartida(partida, kg);
-			this.pisar.zapishiBaba(this, this.skladirani);
+			this.pisar.writeGranny(this, this.skladirani);
 			synchronized (this.pisar) {
 				this.pisar.notifyAll();
 			}
@@ -45,14 +45,14 @@ public class Baba extends Person {
 		return kg;
 	}
 
-	public void skladiraiPartida(List<Zelenchyk> partida, int kg) {
+	public void skladiraiPartida(List<Vegetable> partida, int kg) {
 		LocalDateTime dateTime = LocalDateTime.now();
-		Lyutenica l = new Lyutenica(partida, dateTime, kg);
+		Lyutenitsa l = new Lyutenitsa(partida, dateTime, kg);
 		this.skladirani.add(l);
 		System.out.println("[" + this.getName() + "] skladirah si lyutenicata");
 	}
 
-	public List<Lyutenica> getSkladirani() {
+	public List<Lyutenitsa> getSkladirani() {
 		return Collections.unmodifiableList(skladirani);
 	}
 }

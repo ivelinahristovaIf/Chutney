@@ -3,12 +3,12 @@ package lyutenica;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Lyutenica {
-	private final List<Zelenchyk> partida;
+public class Lyutenitsa {
+	private final List<Vegetable> partida;
 	private final LocalDateTime date;
 	private final int kg;
 
-	public Lyutenica(List<Zelenchyk> partida, LocalDateTime date, int kg) {
+	public Lyutenitsa(List<Vegetable> partida, LocalDateTime date, int kg) {
 		this.partida = partida;
 		this.date = date;
 		this.kg = kg;
